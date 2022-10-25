@@ -43,7 +43,7 @@ class YemekDetayFragment : Fragment() {
     fun adetAzalt(){
         Snackbar.make(tasarim.ivEkle,"Ürün Sepetten Çıkarıldı",Snackbar.LENGTH_SHORT).show()
 
-        //tasarim.ivYemek = viewModel.sonuc ViewModel sayfasındaki sonucu böyle getireceğiz
+        //Live Data commit eklemek için deneme yazısı        //tasarim.ivYemek = viewModel.sonuc ViewModel sayfasındaki sonucu böyle getireceğiz
         //Matematiksel ifadeleri View Model sayfamızda toplayacağız
         //Fragment üzerinde ViewModel yapısı oluşturma işlemi biraz daha farklı Udemy üzerinden 320. derste mevcut
     }
