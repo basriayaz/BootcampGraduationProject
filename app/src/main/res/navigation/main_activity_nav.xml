@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/anasayfaFragment"
-        android:name="com.example.foodapp.AnasayfaFragment"
+        android:name="com.example.foodapp.ui.fragment.AnasayfaFragment"
         android:label="fragment_anasayfa"
         tools:layout="@layout/fragment_anasayfa" >
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/sepetFragment"
-        android:name="com.example.foodapp.SepetFragment"
+        android:name="com.example.foodapp.ui.fragment.SepetFragment"
         android:label="fragment_sepet"
         tools:layout="@layout/fragment_sepet" />
     <fragment
         android:id="@+id/yemekDetayFragment"
-        android:name="com.example.foodapp.YemekDetayFragment"
+        android:name="com.example.foodapp.ui.fragment.YemekDetayFragment"
         android:label="fragment_yemek_detay"
         tools:layout="@layout/fragment_yemek_detay" >
         <argument

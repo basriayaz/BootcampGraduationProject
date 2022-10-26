@@ -1,11 +1,14 @@
-package com.example.foodapp
+package com.example.foodapp.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.foodapp.data.entity.Yemekler
 import com.example.foodapp.databinding.CardTasarimBinding
+import com.example.foodapp.ui.fragment.AnasayfaFragmentDirections
+import com.example.foodapp.util.gecisYap
 import com.google.android.material.snackbar.Snackbar
 
 class YemeklerAdapter(var mContext: Context, var yemeklerListesi:List<Yemekler>)
@@ -36,9 +39,10 @@ class YemeklerAdapter(var mContext: Context, var yemeklerListesi:List<Yemekler>)
             Snackbar.make(it,"Yemek Sepete eklendi",Snackbar.LENGTH_SHORT).show()
 
         }
+
         t.cvYemek.setOnClickListener {
             val gecis = AnasayfaFragmentDirections.detayGecis(yemek = yemek)
-            Navigation.findNavController(it).navigate(gecis)
+            Navigation.gecisYap(it,gecis)
         }
     }
 

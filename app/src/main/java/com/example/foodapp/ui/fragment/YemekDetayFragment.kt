@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,17 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.navArgs
+import com.example.foodapp.ui.viewmodel.YemekDetayViewModel
+import com.example.foodapp.R
 import com.example.foodapp.databinding.FragmentYemekDetayBinding
 import com.google.android.material.snackbar.Snackbar
 
 
 class YemekDetayFragment : Fragment() {
     private lateinit var tasarim:FragmentYemekDetayBinding
-    private val viewModel: AViewModel by viewModels() //View Modeli Fragmenta bağladık
+    private val viewModel: YemekDetayViewModel by viewModels() //View Modeli Fragmenta bağladık
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        tasarim = DataBindingUtil.inflate(inflater,R.layout.fragment_yemek_detay, container, false)
+        tasarim = DataBindingUtil.inflate(inflater, R.layout.fragment_yemek_detay, container, false)
         tasarim.yemekDetayNesnesi = this
         tasarim.hesaplamaSonucu = "0"
         val bundle:YemekDetayFragmentArgs by navArgs()

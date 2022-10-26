@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="yemekDetayNesnesi" type="com.example.foodapp.YemekDetayFragment" />
+        <variable name="yemekDetayNesnesi" type="com.example.foodapp.ui.fragment.YemekDetayFragment" />
         <variable name="hesaplamaSonucu" type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".YemekDetayFragment">
+        tools:context=".ui.fragment.YemekDetayFragment">
 
         <TextView
             android:id="@+id/tvYemekAdet"
