@@ -8,7 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class IslemlerRepo(var ydao:YemeklerDao) {
+class IslemlerRepo() {
 
     var RepoSonuc = MutableLiveData<String>()
 
@@ -34,19 +34,6 @@ class IslemlerRepo(var ydao:YemeklerDao) {
         RepoSonuc.value = adet.toString()
 
     }   
-    fun tumYemekleriAl(){
-    ydao.tumYemekler().enqueue(object : Callback<YemeklerCevap>{
-
-        override fun onResponse(call: Call<YemeklerCevap>, response: Response<YemeklerCevap>) {
-            //Önce listeyi live data ile dışarıdan aldırıp sonrasında buradan taşıyacağız
-
-        }
-
-        override fun onFailure(call: Call<YemeklerCevap>, t: Throwable) {
-
-        }
-    })
-    }
 
 
 }

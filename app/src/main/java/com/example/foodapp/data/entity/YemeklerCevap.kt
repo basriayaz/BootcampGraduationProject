@@ -1,5 +1,6 @@
 package com.example.foodapp.data.entity
 
+import com.example.foodapp.Yemekler
 import com.google.gson.annotations.SerializedName
 
 data class YemeklerCevap(@SerializedName("yemekler") var yemekler:List<Yemekler>,

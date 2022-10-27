@@ -7,6 +7,8 @@ import com.example.foodapp.data.repo.IslemlerRepo
 class YemekDetayViewModel : ViewModel() {
 var sonuc = MutableLiveData<String>()
 var yrepo = IslemlerRepo()
+
+
     init {
         sonuc = yrepo.RepoSonucGetir()
     }

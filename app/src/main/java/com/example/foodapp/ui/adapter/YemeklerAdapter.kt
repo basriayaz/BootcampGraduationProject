@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foodapp.data.entity.Yemekler
+import com.example.foodapp.Yemekler
 import com.example.foodapp.databinding.CardTasarimBinding
 import com.example.foodapp.ui.fragment.AnasayfaFragmentDirections
 import com.example.foodapp.util.gecisYap
