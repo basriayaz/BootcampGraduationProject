@@ -12,12 +12,13 @@ import androidx.navigation.fragment.navArgs
 import com.example.foodapp.ui.viewmodel.YemekDetayViewModel
 import com.example.foodapp.R
 import com.example.foodapp.databinding.FragmentYemekDetayBinding
+import com.example.foodapp.ui.viewmodel.AnasayfaViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
 class YemekDetayFragment : Fragment() {
     private lateinit var tasarim:FragmentYemekDetayBinding
-    private val viewModel: YemekDetayViewModel by viewModels() //View Modeli Fragmenta bağladık
+    private lateinit var viewModel: YemekDetayViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         tasarim = DataBindingUtil.inflate(inflater, R.layout.fragment_yemek_detay, container, false)
         tasarim.yemekDetayNesnesi = this
@@ -28,12 +29,19 @@ class YemekDetayFragment : Fragment() {
         tasarim.toolbarDetay.title = gelenYemek.yemek_adi
         tasarim.ivYemek.setImageResource(resources.getIdentifier(gelenYemek.yemek_resim_adi,"drawable",requireContext().packageName))
         tasarim.tvYemekAdi.text = gelenYemek.yemek_adi
-        tasarim.tvYemekFiyat.text = gelenYemek.yemek_fiyat.toString()
+        tasarim.tvYemekFiyat.text = "${gelenYemek.yemek_fiyat.toString()} ₺"
 
         tasarim.ivSepeteGit.setOnClickListener{
             Snackbar.make(it,"Ürün Sepete Eklendi",Snackbar.LENGTH_SHORT).show()
         }
         return tasarim.root
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val tempViewModel : YemekDetayViewModel by viewModels()
+        viewModel = tempViewModel
     }
 
     fun adetArttir(adetSayisi:String){

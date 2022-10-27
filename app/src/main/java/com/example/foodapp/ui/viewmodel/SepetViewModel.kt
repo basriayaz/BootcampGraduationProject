@@ -1,4 +1,6 @@
 package com.example.foodapp.ui.viewmodel
 
-class SepetViewModel {
+import androidx.lifecycle.ViewModel
+
+class SepetViewModel : ViewModel() {
 }

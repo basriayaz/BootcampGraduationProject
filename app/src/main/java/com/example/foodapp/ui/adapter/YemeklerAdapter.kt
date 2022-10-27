@@ -32,13 +32,15 @@ class YemeklerAdapter(var mContext: Context, var yemeklerListesi:List<Yemekler>)
         val t = holder.tasarim
         t.yemekResmi.setImageResource(
             mContext.resources.getIdentifier(yemek.yemek_resim_adi,"drawable",mContext.packageName))
+        //Cardtasarım anlık tutulan yemek resmi
         t.yemekAdi.text = "${yemek.yemek_adi}"
+        //Anlık Yemek adı
         t.yemekFiyati.text = "${yemek.yemek_fiyat} ₺"
-
+        //Anlık yemek Fiyatı
         t.imageView2.setOnClickListener{
-            Snackbar.make(it,"Yemek Sepete eklendi",Snackbar.LENGTH_SHORT).show()
-
+            Snackbar.make(it,"${t.yemekAdi.text} Sepete eklendi",Snackbar.LENGTH_SHORT).show()
         }
+        //Add butonuna tıklayınca gelen Sepete eklendi işareti
 
         t.cvYemek.setOnClickListener {
             val gecis = AnasayfaFragmentDirections.detayGecis(yemek = yemek)
