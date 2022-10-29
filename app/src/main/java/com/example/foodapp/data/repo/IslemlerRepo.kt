@@ -1,5 +1,6 @@
 package com.example.foodapp.data.repo
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.foodapp.Yemekler
 import com.example.foodapp.data.entity.YemeklerCevap
@@ -9,21 +10,20 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class IslemlerRepo() {
+class IslemlerRepo(var ydao :YemeklerDao) {
     var yemeklerListesi:MutableLiveData<List<Yemekler>>
     var RepoSonuc = MutableLiveData<String>()
+
     init {
         yemeklerListesi = MutableLiveData()
     }
 
-    fun yemekleriGetir() : MutableLiveData<List<Yemekler>> {
-        return yemeklerListesi
-    }
-
-
-
     init {
         RepoSonuc = MutableLiveData<String>("0")
+    }
+
+    fun yemekleriGetir() : MutableLiveData<List<Yemekler>> {
+        return yemeklerListesi
     }
 
     fun RepoSonucGetir() : MutableLiveData<String>{
@@ -46,27 +46,31 @@ class IslemlerRepo() {
     }
 
     fun tumYemekleriGetir(){
-        val liste = ArrayList<Yemekler>()
-        val y1 = Yemekler(1,"Ayran","ayran",3)
-        val y2 = Yemekler(2,"Ayran","ayran",3)
-        val y3 = Yemekler(3,"Ayran","ayran",3)
-        val y4 = Yemekler(4,"Ayran","ayran",3)
-        val y5 = Yemekler(5,"Ayran","ayran",3)
-        val y6 = Yemekler(6,"Ayran","ayran",3)
-        val y7 = Yemekler(7,"Ayran","ayran",3)
-        val y8 = Yemekler(8,"Ayran","ayran",3)
+        ydao.tumYemekler().enqueue(object : Callback<YemeklerCevap>{
+            override fun onResponse(call: Call<YemeklerCevap>, response: Response<YemeklerCevap>) {
+               val liste = response.body()!!.yemekler
+                yemeklerListesi.value = liste
+            }
 
-        liste.add(y1)
-        liste.add(y2)
-        liste.add(y3)
-        liste.add(y4)
-        liste.add(y5)
-        liste.add(y6)
-        liste.add(y7)
-        liste.add(y8)
-        yemeklerListesi.value = liste
+            override fun onFailure(call: Call<YemeklerCevap>, t: Throwable) {}
 
+            }
+        )
+    }
+    fun yemekAra(aramaKelimesi:String){
+        ydao.yemekAra(aramaKelimesi).enqueue(object : Callback<YemeklerCevap>{
+            override fun onResponse(call: Call<YemeklerCevap>, response: Response<YemeklerCevap>) {
+                val liste = response.body()!!.yemekler
+                yemeklerListesi.value = liste
+            }
+
+            override fun onFailure(call: Call<YemeklerCevap>, t: Throwable) {}
+
+        }
+        )
     }
 
 
 }
+
+

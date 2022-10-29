@@ -3,12 +3,12 @@ package com.example.foodapp.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.foodapp.data.repo.IslemlerRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class YemekDetayViewModel : ViewModel() {
+@HiltViewModel
+class YemekDetayViewModel @Inject constructor (var yrepo : IslemlerRepo) : ViewModel() {
 var sonuc = MutableLiveData<String>()
-var yrepo = IslemlerRepo()
-
-
     init {
         sonuc = yrepo.RepoSonucGetir()
     }
@@ -21,5 +21,9 @@ var yrepo = IslemlerRepo()
 
     fun Azalt(adetSayisi:String){
         yrepo.azalt(adetSayisi)
+    }
+
+    fun SepeteGit(){
+        //yrepo.sepete
     }
 }

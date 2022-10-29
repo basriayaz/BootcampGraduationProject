@@ -21,7 +21,11 @@
         android:id="@+id/sepetFragment"
         android:name="com.example.foodapp.ui.fragment.SepetFragment"
         android:label="fragment_sepet"
-        tools:layout="@layout/fragment_sepet" />
+        tools:layout="@layout/fragment_sepet" >
+        <argument
+            android:name="sepetyemek"
+            app:argType="com.example.foodapp.data.entity.SepetYemekler" />
+    </fragment>
     <fragment
         android:id="@+id/yemekDetayFragment"
         android:name="com.example.foodapp.ui.fragment.YemekDetayFragment"
@@ -30,5 +34,8 @@
         <argument
             android:name="yemek"
             app:argType="com.example.foodapp.Yemekler" />
+        <action
+            android:id="@+id/detayGecis2"
+            app:destination="@id/sepetFragment" />
     </fragment>
 </navigation>

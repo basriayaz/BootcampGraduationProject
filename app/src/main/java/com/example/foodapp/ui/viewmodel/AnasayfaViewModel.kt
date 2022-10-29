@@ -4,9 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.foodapp.Yemekler
 import com.example.foodapp.data.repo.IslemlerRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AnasayfaViewModel :ViewModel() {
-    var yrepo = IslemlerRepo()
+
+@HiltViewModel
+class AnasayfaViewModel @Inject constructor (var yrepo : IslemlerRepo) :ViewModel() {
     var yemeklerListesi = MutableLiveData<List<Yemekler>>()
 
     init {
@@ -17,6 +20,9 @@ class AnasayfaViewModel :ViewModel() {
 
     fun yemekleriYukle(){
         yrepo.tumYemekleriGetir()
+    }
+    fun ara(aramaKelimesi:String){
+        yrepo.yemekAra(aramaKelimesi)
     }
 
 }

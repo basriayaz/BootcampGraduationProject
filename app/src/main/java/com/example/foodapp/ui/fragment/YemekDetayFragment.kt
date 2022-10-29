@@ -1,6 +1,7 @@
 package com.example.foodapp.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,14 +9,18 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.foodapp.ui.viewmodel.YemekDetayViewModel
 import com.example.foodapp.R
 import com.example.foodapp.databinding.FragmentYemekDetayBinding
 import com.example.foodapp.ui.viewmodel.AnasayfaViewModel
+import com.example.foodapp.util.gecisYap
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class YemekDetayFragment : Fragment() {
     private lateinit var tasarim:FragmentYemekDetayBinding
     private lateinit var viewModel: YemekDetayViewModel
@@ -27,13 +32,15 @@ class YemekDetayFragment : Fragment() {
         val gelenYemek = bundle.yemek
 
         tasarim.toolbarDetay.title = gelenYemek.yemek_adi
-        tasarim.ivYemek.setImageResource(resources.getIdentifier(gelenYemek.yemek_resim_adi,"drawable",requireContext().packageName))
+        Picasso.get().load("http://kasimadalan.pe.hu/yemekler/resimler/${gelenYemek.yemek_resim_adi}").into(tasarim.ivYemek)
         tasarim.tvYemekAdi.text = gelenYemek.yemek_adi
         tasarim.tvYemekFiyat.text = "${gelenYemek.yemek_fiyat.toString()} ₺"
 
         tasarim.ivSepeteGit.setOnClickListener{
-            Snackbar.make(it,"Ürün Sepete Eklendi",Snackbar.LENGTH_SHORT).show()
+        Log.e("Sepete Gidildi","Sepet")
+            Navigation.findNavController(it).navigate(R.id.detayGecis2)
         }
+
         return tasarim.root
     }
 
@@ -43,19 +50,15 @@ class YemekDetayFragment : Fragment() {
         val tempViewModel : YemekDetayViewModel by viewModels()
         viewModel = tempViewModel
     }
-
+//------------------------------------------------------------------------------------------------------------------------------->>
     fun adetArttir(adetSayisi:String){
             viewModel.Arttir(adetSayisi)
         viewModel.sonuc.observe(this,{tasarim.hesaplamaSonucu = it})
     }
 
-
     fun adetAzalt(adetSayisi:String){
         viewModel.Azalt(adetSayisi)
         viewModel.sonuc.observe(this,{tasarim.hesaplamaSonucu = it})
-    }
-    fun sepeteGit(){
-        Snackbar.make(tasarim.ivEkle,"Ürün Sepetten Çıkarıldı",Snackbar.LENGTH_SHORT).show()
     }
 
 }

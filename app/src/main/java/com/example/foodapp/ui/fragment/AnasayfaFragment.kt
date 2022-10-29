@@ -1,7 +1,6 @@
 package com.example.foodapp.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
@@ -11,13 +10,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.foodapp.ui.viewmodel.YemekDetayViewModel
 import com.example.foodapp.R
-import com.example.foodapp.Yemekler
+import com.example.foodapp.data.entity.YemeklerCevap
+import com.example.foodapp.data.repo.IslemlerRepo
 import com.example.foodapp.databinding.FragmentAnasayfaBinding
 import com.example.foodapp.ui.adapter.YemeklerAdapter
 import com.example.foodapp.ui.viewmodel.AnasayfaViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
+@AndroidEntryPoint
 class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
     private lateinit var tasarim: FragmentAnasayfaBinding
     private lateinit var viewModel: AnasayfaViewModel
@@ -26,6 +30,9 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
 
         tasarim.toolbarAnasayfa.title = "Anasayfa"
         (activity as AppCompatActivity).setSupportActionBar(tasarim.toolbarAnasayfa)
+
+
+
 
         requireActivity().addMenuProvider(object : MenuProvider{
 
@@ -41,7 +48,6 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
             }
         },viewLifecycleOwner,Lifecycle.State.RESUMED)
 
-        //Buraya Yemek Listesi tanımlayacağız sonradan bu listeyi Retrofit ile alacağız
         viewModel.yemeklerListesi.observe(viewLifecycleOwner){
             tasarim.rv.layoutManager = StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL)
             val adapter = YemeklerAdapter(requireContext(),it)
@@ -59,28 +65,14 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
         viewModel = tempViewModel
     }
 
-
-
-
-
-
-
-
-
-
-
-
     override fun onQueryTextSubmit(query: String): Boolean {
-    ara(query)
+    viewModel.ara(query)
         return true
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-    ara(newText)
+    viewModel.ara(newText)
         return true
     }
 
-    fun ara(aramaKelimesi:String){
-    Log.e("Yemek Ara",aramaKelimesi)
-    }
 }
