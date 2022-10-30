@@ -11,26 +11,27 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.foodapp.R
-import com.example.foodapp.data.entity.YemeklerCevap
-import com.example.foodapp.data.repo.IslemlerRepo
 import com.example.foodapp.databinding.FragmentAnasayfaBinding
 import com.example.foodapp.ui.adapter.YemeklerAdapter
 import com.example.foodapp.ui.viewmodel.AnasayfaViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 @AndroidEntryPoint
 class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
     private lateinit var tasarim: FragmentAnasayfaBinding
     private lateinit var viewModel: AnasayfaViewModel
+    private lateinit var searchView: SearchView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         tasarim = DataBindingUtil.inflate(inflater, R.layout.fragment_anasayfa,container, false)
 
         tasarim.toolbarAnasayfa.title = "Anasayfa"
         (activity as AppCompatActivity).setSupportActionBar(tasarim.toolbarAnasayfa)
 
+
+        tasarim.swipeContainer.setOnRefreshListener {
+            fetchTimelineAsync()
+        }
 
 
 
@@ -39,7 +40,7 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.toolbar_menu,menu)
                 val item = menu.findItem(R.id.action_ara)
-                val searchView = item.actionView as SearchView
+                searchView = item.actionView as SearchView
                 searchView.setOnQueryTextListener(this@AnasayfaFragment)
             }
 
@@ -56,6 +57,13 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
 
 
         return tasarim.root
+    }
+
+    fun fetchTimelineAsync() {
+        searchView.setQuery("", true);
+        searchView.setIconified(true);
+        viewModel.yemekleriYukle()
+        tasarim.swipeContainer.setRefreshing(false)
     }
 
 

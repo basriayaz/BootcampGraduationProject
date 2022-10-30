@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foodapp.Yemekler
+import com.example.foodapp.data.entity.Yemek
 import com.example.foodapp.databinding.CardTasarimBinding
 import com.example.foodapp.ui.fragment.AnasayfaFragmentDirections
 import com.example.foodapp.util.gecisYap
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
-class YemeklerAdapter(var mContext: Context, var yemeklerListesi:List<Yemekler>)
+class YemeklerAdapter(var mContext: Context, var yemeklerListesi:List<Yemek>)
     :RecyclerView.Adapter<YemeklerAdapter.CardTasarimTutucu>() {
 
 
@@ -35,10 +35,18 @@ class YemeklerAdapter(var mContext: Context, var yemeklerListesi:List<Yemekler>)
         Picasso.get().load("http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}").into(t.yemekResmi)
         t.yemekAdi.text = "${yemek.yemek_adi}"
         t.yemekFiyati.text = "${yemek.yemek_fiyat} ₺"
-        t.imageView2.setOnClickListener{
-            Snackbar.make(it,"${t.yemekAdi.text} Sepete eklendi",Snackbar.LENGTH_SHORT).show()
-        }
+        //------------------------------------------------- Alt Taraf Taşınacak
+        t.ivArttir.setOnClickListener{
 
+        }
+        t.ivAzalt.setOnClickListener{
+
+        }
+        t.ivSepet.setOnClickListener{
+            val gecis = AnasayfaFragmentDirections.detayGecis(yemek = yemek)
+            Navigation.gecisYap(it,gecis)
+        }
+        //---------------------------------------------------------------------
 
         t.cvYemek.setOnClickListener {
             val gecis = AnasayfaFragmentDirections.detayGecis(yemek = yemek)

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -14,9 +14,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.foodapp.ui.viewmodel.YemekDetayViewModel
 import com.example.foodapp.R
 import com.example.foodapp.databinding.FragmentYemekDetayBinding
-import com.example.foodapp.ui.viewmodel.AnasayfaViewModel
-import com.example.foodapp.util.gecisYap
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,5 +57,6 @@ class YemekDetayFragment : Fragment() {
         viewModel.Azalt(adetSayisi)
         viewModel.sonuc.observe(this,{tasarim.hesaplamaSonucu = it})
     }
+
 
 }

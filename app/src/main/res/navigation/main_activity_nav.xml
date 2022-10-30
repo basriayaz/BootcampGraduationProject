@@ -33,7 +33,7 @@
         tools:layout="@layout/fragment_yemek_detay" >
         <argument
             android:name="yemek"
-            app:argType="com.example.foodapp.Yemekler" />
+            app:argType="com.example.foodapp.data.entity.Yemek" />
         <action
             android:id="@+id/detayGecis2"
             app:destination="@id/sepetFragment" />

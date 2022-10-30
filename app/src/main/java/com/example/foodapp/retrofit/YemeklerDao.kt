@@ -12,15 +12,4 @@ interface YemeklerDao {
 
     @GET("yemekler/tumYemekleriGetir.php")
     fun tumYemekler(): Call<YemeklerCevap>
-
-    @POST("yemekler/tum_kisiler_arama.php")
-    @FormUrlEncoded
-    fun yemekAra(@Field("yemek_adi") yemek_adi:String):Call<YemeklerCevap>
-
-
-    @POST("kisiler/tum_kisiler_arama.php")
-    @FormUrlEncoded
-    fun yemekSil(@Field("yemek_id") yemek_adi:String):Call<CRUDCevap>
-
-
 }

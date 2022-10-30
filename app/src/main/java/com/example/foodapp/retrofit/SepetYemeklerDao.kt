@@ -8,13 +8,9 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface SepetYemeklerDao {
-    //http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php
-    //http://kasimadalan.pe.hu/yemekler/sepettekiYemekleriGetir.php
-    //http://kasimadalan.pe.hu/yemekler/sepeteYemekEkle.php
-    //http://kasimadalan.pe.hu/yemekler/sepettenYemekSil.php
-    //http://kasimadalan.pe.hu/yemekler/resimler/ayran.png
-
-
+    // http://kasimadalan.pe.hu/yemekler/sepettekiYemekleriGetir.php
+    // http://kasimadalan.pe.hu/yemekler/sepeteYemekEkle.php
+    // http://kasimadalan.pe.hu/yemekler/sepettenYemekSil.php
 
     @POST("yemekler/sepettekiYemekleriGetir.php")
     @FormUrlEncoded
