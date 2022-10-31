@@ -21,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SepetFragment : Fragment() {
     private lateinit var tasarim:FragmentSepetBinding
-    private lateinit var sepetAdapter: SepetYemeklerAdapter
     private lateinit var viewModel: SepetViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         tasarim = FragmentSepetBinding.inflate(inflater, container, false)
@@ -31,7 +30,7 @@ class SepetFragment : Fragment() {
 
         viewModel.yemeklerListesi.observe(viewLifecycleOwner){
             tasarim.rv2.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-            val adapter = SepetYemeklerAdapter(requireContext(),it)
+            val adapter = SepetYemeklerAdapter(requireContext(), viewModel,it)
             tasarim.rv2.adapter = adapter
         }
 

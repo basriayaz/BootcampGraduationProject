@@ -25,38 +25,65 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/sepetYemekFiyati"
+                    android:id="@+id/sepetUrunAdedi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="37dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="3₺"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/sepetYemekResmi" />
-
-                <ImageView
-                    android:id="@+id/sepetYemekResmi"
-                    android:layout_width="106dp"
-                    android:layout_height="97dp"
-                    android:layout_marginStart="28dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="monospace"
+                    android:text="0"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="34sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/sepetYemekFiyati"
+                    android:layout_width="98dp"
+                    android:layout_height="27dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="monospace"
+                    android:text="57,00 TL"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivSilYemek"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ayran" />
+                    app:layout_constraintVertical_bias="0.558" />
 
                 <TextView
                     android:id="@+id/sepetYemekAdi"
+                    android:layout_width="110dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="monospace"
+                    android:text="Ayran"
+                    android:textColor="@color/design_default_color_error"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/sepetYemekResmi"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/sepetYemekResmi"
+                    android:layout_width="77dp"
+                    android:layout_height="73dp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sepetUrunAdedi"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:srcCompat="@drawable/ayran" />
+
+                <ImageView
+                    android:id="@+id/ivSilYemek"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="37dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Ayran"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toTopOf="@+id/sepetYemekFiyati"
-                    app:layout_constraintStart_toEndOf="@+id/sepetYemekResmi" />
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_delete_24" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

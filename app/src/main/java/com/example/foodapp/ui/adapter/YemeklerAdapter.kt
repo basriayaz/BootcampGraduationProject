@@ -8,11 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foodapp.data.entity.Yemek
 import com.example.foodapp.databinding.CardTasarimBinding
 import com.example.foodapp.ui.fragment.AnasayfaFragmentDirections
+import com.example.foodapp.ui.viewmodel.AnasayfaViewModel
 import com.example.foodapp.util.gecisYap
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
-class YemeklerAdapter(var mContext: Context, var yemeklerListesi:List<Yemek>)
+class YemeklerAdapter(var mContext: Context,
+                      var yemeklerListesi:List<Yemek>,
+                      var viewModel : AnasayfaViewModel
+                      )
     :RecyclerView.Adapter<YemeklerAdapter.CardTasarimTutucu>() {
 
 
@@ -33,25 +37,22 @@ class YemeklerAdapter(var mContext: Context, var yemeklerListesi:List<Yemek>)
         val t = holder.tasarim
 
         Picasso.get().load("http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}").into(t.yemekResmi)
-        t.yemekAdi.text = "${yemek.yemek_adi}"
-        t.yemekFiyati.text = "${yemek.yemek_fiyat} ₺"
-        //------------------------------------------------- Alt Taraf Taşınacak
-        t.ivArttir.setOnClickListener{
+        t.yemekAdi.text = yemek.yemek_adi
+        t.yemekFiyati.text = "${yemek.yemek_fiyat},00 TL"
+        t.yemekAdi2.text = yemek.yemek_adi
 
+        t.ivEkle.setOnClickListener {
+            viewModel.sepeteEkle(yemek.yemek_adi,yemek.yemek_resim_adi,yemek.yemek_fiyat,1,"iskocyali")
+            Snackbar.make(t.ivEkle, "${yemek.yemek_adi} Sepete Eklendi", Snackbar.LENGTH_SHORT).show()
         }
-        t.ivAzalt.setOnClickListener{
 
-        }
-        t.ivSepet.setOnClickListener{
-            val gecis = AnasayfaFragmentDirections.detayGecis(yemek = yemek)
-            Navigation.gecisYap(it,gecis)
-        }
-        //---------------------------------------------------------------------
+
 
         t.cvYemek.setOnClickListener {
             val gecis = AnasayfaFragmentDirections.detayGecis(yemek = yemek)
             Navigation.gecisYap(it,gecis)
         }
+
     }
 
 

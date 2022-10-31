@@ -17,15 +17,19 @@ class SepetRepo(var sdao:SepetYemeklerDao) {
     init {
         sepetListesi = MutableLiveData()
     }
+
     fun sepetiGetir() : MutableLiveData<List<SepetYemekler>>{
         return  sepetListesi
     }
+
 
     fun tumSepetGetir(kullanici_adi:String){
         sdao.tumSepetiGetir(kullanici_adi).enqueue(object: Callback<SepetYemeklerCevap> {
             override fun onResponse(call: Call<SepetYemeklerCevap>?, response: Response<SepetYemeklerCevap>) {
                 val liste = response.body()!!.sepetYemekler
-                sepetListesi.value = liste
+
+                val list = liste.distinctBy{it.yemek_adi}
+                sepetListesi.value = list
 
             }
             override fun onFailure(call: Call<SepetYemeklerCevap>?, t: Throwable?) {
@@ -34,21 +38,31 @@ class SepetRepo(var sdao:SepetYemeklerDao) {
             }
         })
     }
-
     fun sepetYemekSil(sepet_yemek_id:Int,kullanici_adi: String){
-        sdao.sepettekiYemekSil(sepet_yemek_id,kullanici_adi).enqueue(object : Callback<CRUDCevap> {
-            override fun onResponse(call: Call<CRUDCevap>?, response: Response<CRUDCevap>) {
+        sdao.sepettekiYemekSil(sepet_yemek_id,kullanici_adi)
+            .enqueue(object : Callback<CRUDCevap> {
+            override fun onResponse(call: Call<CRUDCevap>, response: Response<CRUDCevap>) {
                 tumSepetGetir(kullanici_adi)
+                Log.e("Silme Mesajı","Yemek Silindi")
             }
-            override fun onFailure(call: Call<CRUDCevap>?, t: Throwable?) {}
+            override fun onFailure(call: Call<CRUDCevap>, t: Throwable?) {
+                Log.e("Hata Mesajı","Yemek Silinemedi")
+            }
         })
     }
     fun sepeteEkle(yemek_adi:String, yemek_resim_adi:String, yemek_fiyat:Int, yemek_siparis_adet:Int, kullanici_adi:String){
         sdao.sepeteKaydet(yemek_adi,yemek_resim_adi,yemek_fiyat, yemek_siparis_adet, kullanici_adi)
             .enqueue(object:Callback<CRUDCevap>{
                 override fun onResponse(call: Call<CRUDCevap>?, response: Response<CRUDCevap>) {
+                    //Sepetten Silme işlemi burada yapılacak
+                    Log.e("Olay Mesaji","REsponse geldi Mesajı")
+
                 }
-                override fun onFailure(call: Call<CRUDCevap>?, t: Throwable?) {}
+                override fun onFailure(call: Call<CRUDCevap>?, t: Throwable?) {
+                    Log.e("Hata Mesaji","Hata Mesajı")
+                }
             })
     }
+
+
 }

@@ -23,7 +23,4 @@ var sonuc = MutableLiveData<String>()
         yrepo.azalt(adetSayisi)
     }
 
-    fun SepeteGit(){
-        //yrepo.sepete
-    }
 }

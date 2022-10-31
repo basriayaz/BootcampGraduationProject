@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.foodapp.R
+import com.example.foodapp.data.entity.Yemek
 import com.example.foodapp.databinding.FragmentAnasayfaBinding
 import com.example.foodapp.ui.adapter.YemeklerAdapter
 import com.example.foodapp.ui.viewmodel.AnasayfaViewModel
@@ -23,8 +24,8 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
     private lateinit var viewModel: AnasayfaViewModel
     private lateinit var searchView: SearchView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        tasarim = DataBindingUtil.inflate(inflater, R.layout.fragment_anasayfa,container, false)
 
+        tasarim = DataBindingUtil.inflate(inflater, R.layout.fragment_anasayfa,container, false)
         tasarim.toolbarAnasayfa.title = "Anasayfa"
         (activity as AppCompatActivity).setSupportActionBar(tasarim.toolbarAnasayfa)
 
@@ -32,7 +33,6 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
         tasarim.swipeContainer.setOnRefreshListener {
             fetchTimelineAsync()
         }
-
 
 
         requireActivity().addMenuProvider(object : MenuProvider{
@@ -51,9 +51,10 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
 
         viewModel.yemeklerListesi.observe(viewLifecycleOwner){
             tasarim.rv.layoutManager = StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL)
-            val adapter = YemeklerAdapter(requireContext(),it)
+            val adapter = YemeklerAdapter(requireContext(),it,viewModel)
             tasarim.rv.adapter = adapter
         }
+
 
 
         return tasarim.root
@@ -82,5 +83,6 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
     viewModel.ara(newText)
         return true
     }
+
 
 }

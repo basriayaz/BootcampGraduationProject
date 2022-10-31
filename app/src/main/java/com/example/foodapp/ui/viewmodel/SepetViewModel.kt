@@ -14,15 +14,21 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SepetViewModel @Inject constructor (var yrepo : SepetRepo) : ViewModel() {
+class SepetViewModel @Inject constructor (var srepo : SepetRepo) : ViewModel() {
     var yemeklerListesi = MutableLiveData<List<SepetYemekler>>()
-
+    var filtreYemeklerListesi = MutableLiveData<List<SepetYemekler>>()
 
     init {
         yemekleriYukle()
-        yemeklerListesi = yrepo.sepetiGetir()
+        yemeklerListesi = srepo.sepetiGetir()
     }
     fun yemekleriYukle(){
-        yrepo.tumSepetGetir("iskocyali")
+        srepo.tumSepetGetir("iskocyali")
     }
+    fun yemekSil(yemek_id:Int){
+        srepo.sepetYemekSil(yemek_id,"iskocyali")
+        yemekleriYukle()
+    }
+
+
 }

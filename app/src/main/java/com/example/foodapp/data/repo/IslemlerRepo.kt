@@ -1,9 +1,7 @@
 package com.example.foodapp.data.repo
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.foodapp.data.entity.*
-import com.example.foodapp.retrofit.SepetYemeklerDao
 import com.example.foodapp.retrofit.YemeklerDao
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,11 +31,9 @@ class IslemlerRepo(var ydao :YemeklerDao) {
     }
 
     fun RepoSonucGetir() : MutableLiveData<String>{
-
         return RepoSonuc
     }
 
-    //İki farklı fonksiyonda sonuc değerini değiştiriyoruz buna side effect deniyor
     fun arttir(adetSayisi:String){
         var adet = adetSayisi.toInt()
         adet += 1
@@ -50,6 +46,7 @@ class IslemlerRepo(var ydao :YemeklerDao) {
         RepoSonuc.value = adet.toString()
 
     }
+
 
     fun tumYemekleriGetir(){
         ydao.tumYemekler().enqueue(object : Callback<YemeklerCevap>{
@@ -68,7 +65,6 @@ class IslemlerRepo(var ydao :YemeklerDao) {
        filtreliYemekler.value = yemeklerListesi.value?.filter {
             it.yemek_adi.lowercase().contains(aramaKelimesi)
         }
-        //Log.e("Yemklerimizin listesi",yemeklerListesi.value.toString())
     }
 
 

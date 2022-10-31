@@ -22,9 +22,9 @@
         android:name="com.example.foodapp.ui.fragment.SepetFragment"
         android:label="fragment_sepet"
         tools:layout="@layout/fragment_sepet" >
-        <argument
-            android:name="sepetyemek"
-            app:argType="com.example.foodapp.data.entity.SepetYemekler" />
+        <action
+            android:id="@+id/anasayfaGecis"
+            app:destination="@id/anasayfaFragment" />
     </fragment>
     <fragment
         android:id="@+id/yemekDetayFragment"
