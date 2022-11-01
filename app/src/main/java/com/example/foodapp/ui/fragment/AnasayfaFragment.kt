@@ -9,9 +9,9 @@ import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.foodapp.R
-import com.example.foodapp.data.entity.Yemek
 import com.example.foodapp.databinding.FragmentAnasayfaBinding
 import com.example.foodapp.ui.adapter.YemeklerAdapter
 import com.example.foodapp.ui.viewmodel.AnasayfaViewModel
@@ -19,13 +19,17 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
+class AnasayfaFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var tasarim: FragmentAnasayfaBinding
     private lateinit var viewModel: AnasayfaViewModel
     private lateinit var searchView: SearchView
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        tasarim = DataBindingUtil.inflate(inflater, R.layout.fragment_anasayfa,container, false)
+        tasarim = DataBindingUtil.inflate(inflater, R.layout.fragment_anasayfa, container, false)
         tasarim.toolbarAnasayfa.title = "Anasayfa"
         (activity as AppCompatActivity).setSupportActionBar(tasarim.toolbarAnasayfa)
 
@@ -35,11 +39,16 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
         }
 
 
-        requireActivity().addMenuProvider(object : MenuProvider{
+        requireActivity().addMenuProvider(object : MenuProvider {
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.toolbar_menu,menu)
+                menuInflater.inflate(R.menu.toolbar_menu, menu)
                 val item = menu.findItem(R.id.action_ara)
+                val item2 = menu.findItem(R.id.action_sepet)
+                item2.setOnMenuItemClickListener {
+                    Navigation.findNavController(tasarim.toolbarAnasayfa).navigate(R.id.sepetGecis)
+                    false
+                }
                 searchView = item.actionView as SearchView
                 searchView.setOnQueryTextListener(this@AnasayfaFragment)
             }
@@ -47,11 +56,12 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return false
             }
-        },viewLifecycleOwner,Lifecycle.State.RESUMED)
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        viewModel.yemeklerListesi.observe(viewLifecycleOwner){
-            tasarim.rv.layoutManager = StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL)
-            val adapter = YemeklerAdapter(requireContext(),it,viewModel)
+        viewModel.yemeklerListesi.observe(viewLifecycleOwner) {
+            tasarim.rv.layoutManager =
+                StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+            val adapter = YemeklerAdapter(requireContext(), it, viewModel)
             tasarim.rv.adapter = adapter
         }
 
@@ -70,17 +80,17 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val tempViewModel : AnasayfaViewModel by viewModels()
+        val tempViewModel: AnasayfaViewModel by viewModels()
         viewModel = tempViewModel
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
-    viewModel.ara(query)
+        viewModel.ara(query)
         return true
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-    viewModel.ara(newText)
+        viewModel.ara(newText)
         return true
     }
 

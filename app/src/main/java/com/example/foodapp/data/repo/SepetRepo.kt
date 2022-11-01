@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.example.foodapp.data.entity.CRUDCevap
 import com.example.foodapp.data.entity.SepetYemekler
 import com.example.foodapp.data.entity.SepetYemeklerCevap
-import com.example.foodapp.data.entity.Yemek
 import com.example.foodapp.retrofit.SepetYemeklerDao
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,8 +25,7 @@ class SepetRepo(var sdao: SepetYemeklerDao) {
     fun tumSepetGetir(kullanici_adi: String) {
         sdao.tumSepetiGetir(kullanici_adi).enqueue(object : Callback<SepetYemeklerCevap> {
             override fun onResponse(
-                call: Call<SepetYemeklerCevap>?,
-                response: Response<SepetYemeklerCevap>
+                call: Call<SepetYemeklerCevap>?, response: Response<SepetYemeklerCevap>
             ) {
                 val liste = response.body()!!.sepetYemekler
                 val sonliste = ArrayList<SepetYemekler>()
@@ -73,16 +71,14 @@ class SepetRepo(var sdao: SepetYemeklerDao) {
         })
     }
 
+
     fun sepetYemekSil(sepet_yemek_id: Int, kullanici_adi: String) {
-        sdao.sepettekiYemekSil(sepet_yemek_id, kullanici_adi)
-            .enqueue(object : Callback<CRUDCevap> {
+        sdao.sepettekiYemekSil(sepet_yemek_id, kullanici_adi).enqueue(object : Callback<CRUDCevap> {
                 override fun onResponse(call: Call<CRUDCevap>, response: Response<CRUDCevap>) {
                     tumSepetGetir(kullanici_adi)
-                    Log.e("Silme Mesajı", "Yemek Silindi")
                 }
 
                 override fun onFailure(call: Call<CRUDCevap>, t: Throwable?) {
-                    Log.e("Hata Mesajı", "Yemek Silinemedi")
                 }
             })
     }
@@ -95,21 +91,12 @@ class SepetRepo(var sdao: SepetYemeklerDao) {
         kullanici_adi: String
     ) {
         sdao.sepeteKaydet(
-            yemek_adi,
-            yemek_resim_adi,
-            yemek_fiyat,
-            yemek_siparis_adet,
-            kullanici_adi
-        )
-            .enqueue(object : Callback<CRUDCevap> {
+            yemek_adi, yemek_resim_adi, yemek_fiyat, yemek_siparis_adet, kullanici_adi
+        ).enqueue(object : Callback<CRUDCevap> {
                 override fun onResponse(call: Call<CRUDCevap>?, response: Response<CRUDCevap>) {
-                    //Sepetten Silme işlemi burada yapılacak
-                    Log.e("Olay Mesaji", "REsponse geldi Mesajı")
-
                 }
 
                 override fun onFailure(call: Call<CRUDCevap>?, t: Throwable?) {
-                    Log.e("Hata Mesaji", "Hata Mesajı")
                 }
             })
     }

@@ -1,19 +1,12 @@
 package com.example.foodapp.ui.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodapp.data.entity.SepetYemekler
-import com.example.foodapp.data.entity.Yemek
-import com.example.foodapp.databinding.CardTasarimBinding
 import com.example.foodapp.databinding.SepetCardTasarimBinding
-import com.example.foodapp.ui.fragment.AnasayfaFragmentDirections
 import com.example.foodapp.ui.viewmodel.SepetViewModel
-import com.example.foodapp.util.gecisYap
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 class SepetYemeklerAdapter(
@@ -56,7 +49,6 @@ class SepetYemeklerAdapter(
     override fun getItemCount(): Int {
         return sepetYemeklerListesi.size
     }
-
 
 
 }

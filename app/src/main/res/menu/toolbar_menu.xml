@@ -8,4 +8,9 @@
         android:title="Ara"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
+    <item
+        android:id="@+id/action_sepet"
+        android:icon="@drawable/sepet"
+        android:title="Sepet"
+        app:showAsAction="always|collapseActionView" />
 </menu>
