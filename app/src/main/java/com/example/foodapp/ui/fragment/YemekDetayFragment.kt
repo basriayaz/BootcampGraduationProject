@@ -30,13 +30,15 @@ class YemekDetayFragment : Fragment() {
         
         val bundle: YemekDetayFragmentArgs by navArgs()
         val gelenYemek = bundle.yemek
-        tasarim.toolbarDetay.title = gelenYemek.yemek_adi.toString()
-            tasarim.toolbarDetay.title = gelenYemek.yemek_adi
+        tasarim.toolbarDetay.title = gelenYemek.yemek_adi
+
         Picasso.get()
             .load("http://kasimadalan.pe.hu/yemekler/resimler/${gelenYemek.yemek_resim_adi}")
             .into(tasarim.ivYemek)
         tasarim.tvYemekAdi.text = gelenYemek.yemek_adi
-        tasarim.tvYemekFiyat.text = "${gelenYemek.yemek_fiyat.toString()} ₺"
+
+            tasarim.tvYemekFiyat.text = "${gelenYemek.yemek_fiyat} TL"
+
         tasarim.ivSepeteGit.setOnClickListener {
 
             for(i in 1..tasarim.tvYemekAdet.text.toString().toInt()) {

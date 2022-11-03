@@ -25,6 +25,9 @@
         <action
             android:id="@+id/anasayfaGecis"
             app:destination="@id/anasayfaFragment" />
+        <action
+            android:id="@+id/siparisTamamlandiGecis"
+            app:destination="@id/siparisTamamlandiFragment" />
     </fragment>
     <fragment
         android:id="@+id/yemekDetayFragment"
@@ -38,4 +41,9 @@
             android:id="@+id/detayGecis2"
             app:destination="@id/sepetFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/siparisTamamlandiFragment"
+        android:name="com.example.foodapp.ui.fragment.SiparisTamamlandiFragment"
+        android:label="fragment_siparis_tamamlandi"
+        tools:layout="@layout/fragment_siparis_tamamlandi" />
 </navigation>

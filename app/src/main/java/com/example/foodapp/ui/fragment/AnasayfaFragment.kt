@@ -58,6 +58,7 @@ class AnasayfaFragment : Fragment(), SearchView.OnQueryTextListener {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
+
         viewModel.yemeklerListesi.observe(viewLifecycleOwner) {
             tasarim.rv.layoutManager =
                 StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)

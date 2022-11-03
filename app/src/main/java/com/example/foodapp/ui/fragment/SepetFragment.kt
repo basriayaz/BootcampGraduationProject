@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.size
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.foodapp.R
 import com.example.foodapp.data.entity.SepetYemekler
 import com.example.foodapp.databinding.FragmentSepetBinding
 import com.example.foodapp.ui.adapter.SepetYemeklerAdapter
 import com.example.foodapp.ui.viewmodel.SepetViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -36,11 +39,19 @@ class SepetFragment : Fragment() {
                 StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
             val adapter = SepetYemeklerAdapter(requireContext(), viewModel, it)
             tasarim.rv2.adapter = adapter
-
             tasarim.totalUcret.text = "Toplam Tutar : ${totalFiyat(it).toString()} TL"
-
+        }
+        tasarim.siparisVer.setOnClickListener {
+            if(tasarim.totalUcret.text!="Toplam Tutar : 0 TL"){
+            Navigation.findNavController(it).navigate(R.id.siparisTamamlandiGecis)
+            Snackbar.make(it,"Siparişiniz yola çıktı, yaklaşık 30 dakika içerisinde size ulaşacak", Snackbar.LENGTH_SHORT)
+                .show()
+        }else{
+                Snackbar.make(it,"Sepetiniz Boş, Lütfen bir ürün ekleyerek tekrar deneyin", Snackbar.LENGTH_SHORT)
+                    .show()
         }
 
+        }
         return tasarim.root
     }
 

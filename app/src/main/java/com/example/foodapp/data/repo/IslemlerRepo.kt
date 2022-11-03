@@ -40,7 +40,9 @@ class IslemlerRepo(var ydao: YemeklerDao) {
 
     fun azalt(adetSayisi: String) {
         var adet = adetSayisi.toInt()
-        adet -= 1
+        if(adet>0) {
+            adet -= 1
+        }
         RepoSonuc.value = adet.toString()
 
     }
