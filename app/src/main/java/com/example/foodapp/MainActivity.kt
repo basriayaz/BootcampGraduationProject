@@ -1,19 +1,11 @@
 package com.example.foodapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI.setupWithNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.foodapp.databinding.ActivityMainBinding
-import com.example.foodapp.ui.fragment.AnasayfaFragment
-import com.example.foodapp.ui.fragment.AnasayfaFragmentDirections
-import com.example.foodapp.ui.fragment.SepetFragment
-import com.example.foodapp.ui.fragment.SepetFragmentDirections
-import com.example.foodapp.util.gecisYap
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +15,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         tasarim = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
+/*
+        val timer = object: CountDownTimer(3000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {}
+            override fun onFinish() {
+                val intent = Intent(this@MainActivity,SplashScreenActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        timer.start()*/
 
     }
 }
