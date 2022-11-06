@@ -42,7 +42,6 @@ class YemeklerAdapter(
             .into(t.yemekResmi)
         t.yemekAdi.text = yemek.yemek_adi
         t.yemekFiyati.text = "${yemek.yemek_fiyat},00 TL"
-        t.yemekAdi2.text = yemek.yemek_adi
 
         t.ivEkle.setOnClickListener {
             viewModel.sepeteEkle(

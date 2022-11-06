@@ -33,7 +33,6 @@ class AnasayfaFragment : Fragment(), SearchView.OnQueryTextListener {
         tasarim.toolbarAnasayfa.title = "Anasayfa"
         (activity as AppCompatActivity).setSupportActionBar(tasarim.toolbarAnasayfa)
 
-
         tasarim.swipeContainer.setOnRefreshListener {
             fetchTimelineAsync()
         }
@@ -61,11 +60,11 @@ class AnasayfaFragment : Fragment(), SearchView.OnQueryTextListener {
 
         viewModel.yemeklerListesi.observe(viewLifecycleOwner) {
             tasarim.rv.layoutManager =
-                StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             val adapter = YemeklerAdapter(requireContext(), it, viewModel)
             tasarim.rv.adapter = adapter
+            viewModel.yemeklerListesi
         }
-
 
 
         return tasarim.root

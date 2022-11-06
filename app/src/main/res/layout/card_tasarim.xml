@@ -8,13 +8,13 @@
     </data>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvYemek"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_marginStart="3dp"
@@ -25,35 +25,21 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/yemekAdi2"
-                    android:layout_width="93dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="1dp"
-                    android:fontFamily="@font/asap_medium"
-                    android:text="Ayran"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/yemekResmi"
-                    app:layout_constraintTop_toBottomOf="@+id/yemekAdi" />
-
-                <TextView
                     android:id="@+id/yemekFiyati"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="sans-serif-medium"
+                    android:fontFamily="@font/armataz"
                     android:text="15,00 TL"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/yemekResmi"
-                    app:layout_constraintTop_toBottomOf="@+id/yemekAdi2" />
+                    app:layout_constraintTop_toBottomOf="@+id/yemekAdi" />
 
                 <ImageView
                     android:id="@+id/yemekResmi"
-                    android:layout_width="106dp"
-                    android:layout_height="97dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="3dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -62,14 +48,14 @@
 
                 <TextView
                     android:id="@+id/yemekAdi"
-                    android:layout_width="185dp"
-                    android:layout_height="26dp"
+                    android:layout_width="107dp"
+                    android:layout_height="23dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="5dp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/armataz"
                     android:text="Ayran"
                     android:textColor="@color/design_default_color_error"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/yemekResmi"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,10 +63,8 @@
                     android:id="@+id/ivEkle"
                     android:layout_width="42dp"
                     android:layout_height="39dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginBottom="12dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/yemekAdi"
+                    app:layout_constraintTop_toBottomOf="@+id/yemekFiyati"
                     app:srcCompat="@drawable/add_icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

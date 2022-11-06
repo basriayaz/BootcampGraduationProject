@@ -49,6 +49,7 @@ class SepetFragment : Fragment() {
         }else{
                 Snackbar.make(it,"Sepetiniz Boş, Lütfen bir ürün ekleyerek tekrar deneyin", Snackbar.LENGTH_SHORT)
                     .show()
+
         }
 
         }

@@ -26,5 +26,9 @@ class SepetViewModel @Inject constructor(var srepo: SepetRepo) : ViewModel() {
         yemekleriYukle()
     }
 
+    fun tumYemekSil(yemek_id: Int){
+        srepo.sepetYemekSil(yemek_id,"iskocyali")
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.foodapp.data.repo
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.foodapp.data.entity.*
 import com.example.foodapp.retrofit.YemeklerDao
@@ -17,15 +18,13 @@ class IslemlerRepo(var ydao: YemeklerDao) {
     init {
         yemeklerListesi = MutableLiveData()
         filtreliYemekler = MutableLiveData()
-    }
-
-    init {
         RepoSonuc = MutableLiveData<String>("0")
     }
 
 
     fun yemekleriGetir(): MutableLiveData<List<Yemek>> {
         return filtreliYemekler
+
     }
 
     fun RepoSonucGetir(): MutableLiveData<String> {
@@ -53,6 +52,7 @@ class IslemlerRepo(var ydao: YemeklerDao) {
             override fun onResponse(call: Call<YemeklerCevap>, response: Response<YemeklerCevap>) {
                 val liste = response.body()!!.yemekler
                 yemeklerListesi.value = liste
+                filtreliYemekler.value = liste
 
             }
 

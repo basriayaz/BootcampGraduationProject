@@ -11,6 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SepetRepo(var sdao: SepetYemeklerDao) {
+    var nick_name:String = "iskocyali"
     var sepetListesi: MutableLiveData<List<SepetYemekler>>
 
     init {
@@ -38,7 +39,7 @@ class SepetRepo(var sdao: SepetYemeklerDao) {
                         liste[i].yemek_resim_adi,
                         liste[i].yemek_fiyat,
                         liste[i].yemek_siparis_adet,
-                        "iskocyali"
+                        nick_name
                     )
                     if (liste[i].yemek_adi == "var") {
                         continue
@@ -82,6 +83,7 @@ class SepetRepo(var sdao: SepetYemeklerDao) {
                 }
             })
     }
+
 
     fun sepeteEkle(
         yemek_adi: String,
